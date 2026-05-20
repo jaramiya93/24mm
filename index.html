@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>24MM Film Academy — Shape Your Vision</title>
+
+  <!-- External CDNs -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <!-- Google Fonts: Geist Sans & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Geist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            geist: ['"Geist"', 'sans-serif'],
+          },
+          colors: {
+            brandBg: '#FAFDEE',
+            brandDark: '#1F3A4B',
+            brandAccent: '#C2F84F',
+            orangeReveal: '#cc0000',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Core Styles -->
+  <style>
+    /* Custom spring ease curve for Framer-Motion-like spring feel */
+    .expand-card {
+      transition: width 650ms cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .expand-card:hover {
+      transform: translateY(-8px);
+    }
+    
+    /* Smooth custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f5f4f3;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1F3A4B;
+      border-radius: 5px;
+    }
+
+    /* Lenis Smooth Scroll Setup */
+    html.lenis {
+      height: auto;
+    }
+    .lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+    .lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+  </style>
+</head>
+<body class="bg-[#f5f4f3] text-black font-sans overflow-x-hidden antialiased">
+
+  <!-- ================= DYNAMIC GLASSMORPHIC NAVIGATION BAR ================= -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-5 backdrop-blur-md bg-white/75 border-b border-black/5">
+    <!-- Left Logo Side -->
+    <a href="#" class="font-geist font-black tracking-tighter text-lg md:text-xl text-black flex items-center gap-2 select-none hover:opacity-80 transition-opacity">
+      <span class="w-3 h-3 bg-red-600 rounded-full animate-pulse relative"></span>
+      24MM Film Academy
+    </a>
+
+    <!-- Right Header Actions Side -->
+    <div class="flex items-center gap-6 md:gap-8 font-geist text-xs uppercase tracking-wider font-bold">
+      <a href="#gallery-section" class="hidden md:inline hover:text-orangeReveal transition-colors">HOME</a>
+      <a href="#hover-section" class="hidden md:inline hover:text-orangeReveal transition-colors">WORKS</a>
+      <a href="#reveal-3d-section" class="hover:text-orangeReveal transition-colors">WHY US</a>
+      <a href="https://wa.me/919999999999?text=Hi,%20I'm%20interested%20in%20admissions%20at%20Skiper%20Film%20Academy." target="_blank" class="px-5 py-3.5 bg-black text-white hover:bg-orangeReveal hover:text-white rounded-full transition-all duration-300 shadow-md">contact us</a>
+    </div>
+  </nav>
+
+  <!-- ================= PAGE 1: HERO & SMOOTH PARALLAX COLUMNS (Skiper30) ================= -->
+  <section id="gallery-section" class="w-full bg-[#eee] text-black">
+    
+    <!-- Intro Welcome Container with Background Video -->
+    <div class="font-geist flex h-screen items-center justify-center relative overflow-hidden select-none">
+      
+      <!-- Video Element & Overlay -->
+      <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <!-- Premium background video -->
+        <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-[0.6] filter saturate-50 contrast-105">
+          <source src="vv1.mp4" type="video/mp4">
+        </video>
+        <!-- Corrected premium opacity overlay layers -->
+        <div class="absolute inset-0 bg-[#eee]/45 backdrop-blur-[1px]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#eee]/10 via-[#eee]/40 to-[#eee]"></div>
+      </div>
+
+      <!-- Hero Typography Content -->
+      <div class="absolute left-1/2 top-[42%] grid -translate-x-1/2 content-start justify-items-center gap-8 text-center z-10 relative">
+        <h1 class="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.85]">CINEMATIC<br><span class="text-black/35">FRAMES</span></h1>
+        <div class="relative w-fit">
+          <span class="text-xs font-semibold uppercase tracking-widest text-black/50 block mb-1">explore the academy modules below</span>
+          <div class="w-px h-16 bg-gradient-to-b from-black/50 to-transparent mx-auto mt-4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The 4-Column Parallax Grid Canvas -->
+    <div id="gallery-container" class="relative box-border flex h-[175vh] gap-[2vw] overflow-hidden bg-white p-[2vw] shadow-inner">
+      
+      <!-- Col 1 -->
+      <div class="parallax-col relative w-1/4 min-w-[200px] flex flex-col gap-[2vw] transform-gpu will-change-transform" style="top: -45%;" data-speed="1.4">
+        <div class="relative h-full w-full overflow-hidden rounded-[1.5rem] shadow-lg"><img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&auto=format&fit=crop" class="w-full h-full object-cover select-none pointer-events-none" alt="Cinema Clapper"></div>
+        <div class="relative h-full w-full overflow-hidden rounded-[1.5rem] shadow-lg"><img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&auto=format&fit=crop" class="w-full h-full object-cover select-none pointer-events-none" alt="Camera Operator"></div>
+        <div class="relative h-full w-full overflow-hidden rounded-[1.5rem] shadow-lg"><img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&auto=format&fit=crop" class="w-full h-full object-cover select-none pointer-events-none" alt="Theatre Screen"></div>
+      </div>
+
+      <!-- Col 2 -->
+      <div class="parallax-col relative w-1/4 min-w-[200px] flex flex-col gap-[2vw] transform-gpu will-change-transform" style="top: -95%;" data-speed="2.6">
+        <div class="relative h-full w-full overflow-hidden rounded-[1.5rem] shadow-lg"><img src="https://images.unsplash.com/photo-1505686994434-e3cc5abf1330?w=600&auto=format&fit=crop" class="w-full h-full object-cover select-none pointer-events-none" alt="Projector beam"></div>
+        <div class="relative h-full w-full overflow-hidden rounded-[1.5rem] shadow-lg"><img src="https://images.unsplash.com/photo-1542204172-e7052809f852?w=600&auto=format&fit=crop" class="w-full h-full object-cover select-none pointer-events-none" alt="High-end viewfinder"></div>
+        <div class="relative h-full w-full overflow-hidden rounded-[1.5rem] shadow-lg"><img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=600&auto=format&fit=crop" class="w-full h-full object-cover select-none pointer-events-none" alt="Vintage theater chairs"></div>
+      </div>
+
+      <!-- Col 3 -->
+      <div class="parallax-col relative w-1/4 min-w-[200px] flex flex-col gap-[2vw] transform-gpu will-change-transform" style="top: -45%;" data-speed="0.9">
+        <div class="relative h-full w-full overflow-hidden rounded-[1.5rem] shadow-lg"><img src="https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?w=600&auto=format&fit=crop" class="w-full h-full object-cover select-none pointer-events-none" alt="Camera on rig"></div>
+        <div class="relative h-full w-full overflow-hidden rounded-[1.5rem] shadow-lg"><img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=600&auto=format&fit=crop" class="w-full h-full object-cover select-none pointer-events-none" alt="Film studio lights"></div>
+        <div class="relative h-full w-full overflow-hidden rounded-[1.5rem] shadow-lg"><img src="https://images.unsplash.com/photo-1574717024453-354056afd6fc?w=600&auto=format&fit=crop" class="w-full h-full object-cover select-none pointer-events-none" alt="Video editor deck"></div>
+      </div>
+
+      <!-- Col 4 -->
+      <div class="parallax-col relative w-1/4 min-w-[200px] flex flex-col gap-[2vw] transform-gpu will-change-transform" style="top: -75%;" data-speed="2.1">
+        <div class="relative h-full w-full overflow-hidden rounded-[1.5rem] shadow-lg"><img src="https://images.unsplash.com/photo-1478720143023-e55cd2b79363?w=600&auto=format&fit=crop" class="w-full h-full object-cover select-none pointer-events-none" alt="Prime cinema lens"></div>
+        <div class="relative h-full w-full overflow-hidden rounded-[1.5rem] shadow-lg"><img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?w=600&auto=format&fit=crop" class="w-full h-full object-cover select-none pointer-events-none" alt="Neon popcorn box"></div>
+        <div class="relative h-full w-full overflow-hidden rounded-[1.5rem] shadow-lg"><img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=600&auto=format&fit=crop" class="w-full h-full object-cover select-none pointer-events-none" alt="Theatre marquee"></div>
+      </div>
+    </div>
+
+    <!-- Bottom Indicator -->
+    <div class="font-geist flex h-60 items-center justify-center relative bg-white">
+      <div class="grid justify-items-center gap-4 text-center">
+        <span class="text-xs uppercase tracking-widest text-black/40 font-bold">Keep scrolling down</span>
+        <div class="w-px h-8 bg-gradient-to-b from-black/20 to-transparent"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PAGE 2: INTERACTIVE HOVER EXPAND CARDS (Skiper52) ================= -->
+  <section id="hover-section" class="min-h-screen w-full flex flex-col items-center justify-center bg-[#f5f4f3] py-28 px-4 md:px-8 border-t border-black/5">
+    <div class="text-center mb-16 max-w-2xl select-none">
+      <span class="text-xs font-bold tracking-widest text-black/40 uppercase">24mm film Academy</span>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-black mt-3">DOP Sridhar works</h2>
+      <p class="text-black/60 mt-4 text-base md:text-lg">Move your cursor over the visual tracks below to explore the professional fields taught at the academy.</p>
+    </div>
+
+    <!-- Responsive Cards Slider Track -->
+    <div class="relative w-full max-w-7xl overflow-x-auto pb-8 scrollbar-thin">
+      <div id="cards-container" class="flex items-center justify-center gap-3 min-w-[900px] py-4 px-6">
+        <!-- JS dynamically fills items here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PAGE 3: 3D ROTATING TEXT REVEAL ON SCROLL (Skiper28) ================= -->
+  <section id="reveal-3d-section" class="relative z-0 h-[260vh] w-full bg-[#f5f4f3] text-black border-t border-black/5">
+    <!-- Static Header Background -->
+    <div class="absolute left-1/2 top-[10%] grid -translate-x-1/2 content-start justify-items-center gap-4 text-center select-none pointer-events-none">
+      <span class="text-xs uppercase tracking-widest font-bold text-black/40">Our Manifesto</span>
+      <div class="w-px h-10 bg-black/10 mt-2"></div>
+    </div> <br><br><br><br>
+
+    <!-- Sticky Perspective Field -->
+    <div class="sticky top-0 h-screen mx-auto flex items-center justify-center bg-transparent overflow-hidden" style="perspective: 800px; transform-style: preserve-3d;">
+      <div id="text-3d-container" class="font-geist w-full max-w-4xl px-6 text-center text-2xl md:text-4xl lg:text-5xl font-bold tracking-tighter text-orangeReveal leading-relaxed select-none pointer-events-none transform-gpu will-change-transform" style="transform-style: preserve-3d; transform: rotateX(25deg) translateY(380px) translateZ(10px);">
+       At 24mm Film Academy, we believe cinema is more than entertainment — it is a powerful language that preserves emotion, challenges perspectives, and shapes culture. Our mission is to build filmmakers who think independently, create fearlessly, and develop their own visual identity instead of following trends. Through cinematography, direction, editing, acting, writing, and visual storytelling, we train students to understand both the art and discipline behind meaningful cinema. We believe great films are not made by equipment alone, but by observation, emotion, persistence, and truth. 24mm Film Academy is a space where passion meets process, where creators are encouraged to experiment, fail, learn, and grow into storytellers capable of creating timeless and impactful work. We do not promise shortcuts to fame — we prepare individuals for the real journey of filmmaking with honesty, dedication, and an uncompromising love for the craft.
+        <!-- White bottom fade mask -->
+        <div class="absolute bottom-0 left-0 h-[30vh] w-full bg-gradient-to-b from-transparent to-[#f5f4f3] pointer-events-none"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER / LAST PAGE: WALKING CROWD ANIMATION & DETAILS (Skiper39 + Contacts) ================= -->
+  <footer id="footer-crowd" class="relative h-[110vh] w-full bg-white text-black overflow-hidden flex flex-col justify-between pt-16 z-20 shadow-2xl border-t border-black/5">
+    
+    <!-- Title & Brand Text -->
+    <div class="relative z-10 px-8 md:px-20 max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
+      <div class="max-w-xl">
+        <span class="text-xs font-bold tracking-widest text-black/40 uppercase">Admissions Open</span>
+        <h2 class="text-4xl md:text-6xl font-black tracking-tighter text-black mt-2 leading-[0.95]">Begin your cinematic<br>journey today.</h2>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex flex-wrap gap-4 z-30">
+        <!-- WhatsApp Callout -->
+        <a href="https://wa.me/919999999999?text=Hi,%20I'm%20interested%20in%20admissions%20at%2024mm%20Film%20Academy." target="_blank" class="flex items-center gap-3 px-6 py-4 bg-[#25D366] text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:scale-[1.03] active:scale-95 transition-all duration-300 z-50">
+          <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+            <path d="M12.031 2c-5.514 0-9.989 4.475-9.989 9.989 0 1.88.522 3.636 1.43 5.158l-1.472 5.378 5.511-1.447c1.472.802 3.14 1.258 4.909 1.258 5.514 0 9.989-4.475 9.989-9.989 0-5.514-4.475-9.989-9.989-9.989zm5.556 14.188c-.244.688-1.427 1.349-1.947 1.402-.502.052-1.005.253-3.218-.612-2.834-1.107-4.639-4.004-4.781-4.192-.143-.188-1.161-1.545-1.161-2.946 0-1.401.734-2.088.995-2.368.261-.28.567-.35.756-.35.189 0 .378.001.543.009.176.008.413-.065.648.508.24.586.82 2.003.89 2.148.071.145.119.314.021.508-.099.195-.148.314-.296.486-.149.172-.314.385-.449.516-.149.145-.306.304-.131.604.175.3.778 1.282 1.669 2.074.747.665 1.378.87 1.577.969.2.099.315.084.433-.05.118-.135.508-.592.643-.795.136-.203.271-.169.457-.101.186.068 1.176.554 1.379.656.203.102.339.153.389.24.052.085.052.493-.192 1.181z"/>
+          </svg>
+          Connect on WhatsApp
+        </a>
+        <a href="mailto:24mmfilmacademy@gmail.com" class="px-6 py-4 bg-black text-white font-bold rounded-full shadow-md hover:bg-black/80 hover:scale-[1.03] active:scale-95 transition-all duration-300 z-50">
+          Email Academy
+        </a>
+      </div>
+    </div>
+
+    <!-- Contact details overlay grid -->
+    <div class="relative z-10 px-8 md:px-20 max-w-7xl mx-auto w-full grid grid-cols-2 md:grid-cols-4 gap-8 mb-44 mt-12 text-sm text-black/70 z-30">
+      <div>
+        <p class="font-bold text-xs uppercase tracking-wider text-black mb-2 font-geist">Creative HQ</p>
+        <p class="leading-relaxed">chennai, India &<br>Available Online</p>
+      </div>
+      <div>
+        <p class="font-bold text-xs uppercase tracking-wider text-black mb-2 font-geist">Admissions</p>
+        <p class="leading-relaxed">admissions@@24mmfilmacademy.com<br>+91 (999) 999-9999</p>
+      </div>
+      <div>
+        <p class="font-bold text-xs uppercase tracking-wider text-black mb-2 font-geist">Connect</p>
+        <p class="leading-relaxed">Twitter: @24mmfilmacademy<br>Instagram: @24mmfilmacademy</p>
+      </div>
+      <div>
+        <p class="font-bold text-xs uppercase tracking-wider text-black mb-2 font-geist">Developer</p>
+        <p class="leading-relaxed">vionmedia<br>jarean and team</p>
+      </div>
+    </div>
+
+    <!-- Dynamic Canvas Container (GSAP animated peeps walking across the bottom) -->
+    <div class="absolute bottom-0 w-full h-[60vh] left-0 pointer-events-none select-none z-0">
+      <canvas id="crowd-canvas" class="w-full h-full block"></canvas>
+    </div>
+  </footer>
+
+  <!-- ================= CORE CODE ENGINE ================= -->
+  <script>
+    // -----------------------------------------------------------------
+    // 1. Initialize Lenis Smooth Scroll
+    // -----------------------------------------------------------------
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+      smoothWheel: true
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // -----------------------------------------------------------------
+    // 2. Parallax Columns Logic (Page 1)
+    // -----------------------------------------------------------------
+    const galleryContainer = document.getElementById('gallery-container');
+    const cols = document.querySelectorAll('.parallax-col');
+
+    function animateParallax() {
+      if (!galleryContainer) return;
+      const rect = galleryContainer.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Calculate progress starting when container enters view until it exits completely
+      const scrollRange = rect.height + windowHeight;
+      let progress = (windowHeight - rect.top) / scrollRange;
+      progress = Math.max(0, Math.min(1, progress));
+
+      cols.forEach(col => {
+        const speed = parseFloat(col.getAttribute('data-speed'));
+        const offset = progress * windowHeight * (speed * 0.4);
+        col.style.transform = `translate3d(0, ${offset}px, 0)`;
+      });
+    }
+
+    // -----------------------------------------------------------------
+    // 3. 3D Text Reveal Logic (Page 3)
+    // -----------------------------------------------------------------
+    const revealSection = document.getElementById('reveal-3d-section');
+    const text3DContainer = document.getElementById('text-3d-container');
+
+    function animate3DText() {
+      if (!revealSection || !text3DContainer) return;
+      const rect = revealSection.getBoundingClientRect();
+      const scrollHeight = rect.height - window.innerHeight;
+      
+      let progress = -rect.top / scrollHeight;
+      progress = Math.max(0, Math.min(1, progress));
+
+      const yVal = 380 - (380 * progress);
+      const rotVal = 25 - (25 * progress);
+
+      text3DContainer.style.transform = `rotateX(${rotVal}deg) translateY(${yVal}px) translateZ(10px)`;
+    }
+
+    // Unified Scroll Events Handler
+    window.addEventListener('scroll', () => {
+      animateParallax();
+      animate3DText();
+    });
+
+    // -----------------------------------------------------------------
+    // 4. Hover Expand Images Logic (Curated Film Academy Subjects)
+    // -----------------------------------------------------------------
+    const imagesList = [
+      { src: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&auto=format&fit=crop", code: "# 01", title: "Directing Masterclass", desc: "Crafting narratives & guiding cast performance." },
+      { src: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&auto=format&fit=crop", code: "# 02", title: "Cinematography Lab", desc: "Mastering motion cameras, lenses & premium light grids." },
+      { src: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&auto=format&fit=crop", code: "# 03", title: "Screenwriting Workshop", desc: "Sculpting visual logs, screenplays & acts." },
+      { src: "https://images.unsplash.com/photo-1574717024453-354056afd6fc?w=600&auto=format&fit=crop", code: "# 04", title: "Creative Editing & Color", desc: "Pacing scene sequences, montages & grading." },
+      { src: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&auto=format&fit=crop", code: "# 05", title: "Sound Design Studio", desc: "Engineering foley, soundtracks & spatial audios." },
+      { src: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&auto=format&fit=crop", code: "# 06", title: "Acting for Screen", desc: "Developing authentic physical character presence." }
+    ];
+
+    const cardsContainer = document.getElementById('cards-container');
+    const defaultActiveIndex = 1;
+
+    imagesList.forEach((img, index) => {
+      const card = document.createElement('div');
+      card.className = `expand-card group relative cursor-pointer overflow-hidden rounded-[2rem] h-[28rem] md:h-[32rem] shadow-lg flex-shrink-0`;
+      
+      if (index === defaultActiveIndex) {
+        card.classList.add('w-[16rem]', 'md:w-[24rem]', 'active-card');
+      } else {
+        card.classList.add('w-[3.5rem]', 'md:w-[5rem]');
+      }
+
+      card.innerHTML = `
+        <img src="${img.src}" class="w-full h-full object-cover pointer-events-none select-none transition-transform duration-500 group-hover:scale-105" alt="${img.title}">
+        <!-- Glass Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 pointer-events-none select-none transition-opacity duration-300 ${index === defaultActiveIndex ? 'opacity-100' : 'opacity-0'} overlay-content">
+          <span class="text-white/60 text-xs font-semibold uppercase tracking-widest mb-1.5">${img.code}</span>
+          <h3 class="text-white text-lg font-bold leading-tight font-geist">${img.title}</h3>
+          <p class="text-white/60 text-xs mt-1 font-sans">${img.desc}</p>
+          <p class="text-white/40 text-[10px] mt-2.5 font-semibold tracking-wider uppercase font-geist">Skiper Film Curriculum</p>
+        </div>
+      `;
+
+      const expandCard = () => {
+        document.querySelectorAll('.expand-card').forEach((c) => {
+          c.classList.remove('w-[16rem]', 'md:w-[24rem]', 'active-card');
+          c.classList.add('w-[3.5rem]', 'md:w-[5rem]');
+          const overlay = c.querySelector('.overlay-content');
+          if (overlay) overlay.classList.replace('opacity-100', 'opacity-0');
+        });
+
+        card.classList.remove('w-[3.5rem]', 'md:w-[5rem]');
+        card.classList.add('w-[16rem]', 'md:w-[24rem]', 'active-card');
+        const overlay = card.querySelector('.overlay-content');
+        if (overlay) overlay.classList.replace('opacity-0', 'opacity-100');
+      };
+
+      card.addEventListener('mouseenter', expandCard);
+      card.addEventListener('click', expandCard);
+      cardsContainer.appendChild(card);
+    });
+
+    // -----------------------------------------------------------------
+    // 5. Crowd Walking Canvas Footer (GSAP Sprite Simulation)
+    // -----------------------------------------------------------------
+    const canvas = document.getElementById('crowd-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      const rows = 15;
+      const cols = 7;
+      const src = "https://assets.codepen.io/264161/peeps.png";
+
+      const randomRange = (min, max) => min + Math.random() * (max - min);
+      const randomIndex = (array) => randomRange(0, array.length) | 0;
+      const removeFromArray = (array, i) => array.splice(i, 1)[0];
+      const removeItemFromArray = (array, item) => removeFromArray(array, array.indexOf(item));
+      const removeRandomFromArray = (array) => removeFromArray(array, randomIndex(array));
+      const getRandomFromArray = (array) => array[randomIndex(array) | 0];
+
+      const resetPeep = ({ stage, peep }) => {
+        const direction = Math.random() > 0.5 ? 1 : -1;
+        const offsetY = 100 - 250 * gsap.parseEase("power2.in")(Math.random());
+        const startY = stage.height - peep.height + offsetY;
+        let startX, endX;
+
+        if (direction === 1) {
+          startX = -peep.width;
+          endX = stage.width;
+          peep.scaleX = 1;
+        } else {
+          startX = stage.width + peep.width;
+          endX = 0;
+          peep.scaleX = -1;
+        }
+
+        peep.x = startX;
+        peep.y = startY;
+        peep.anchorY = startY;
+
+        return { startX, startY, endX };
+      };
+
+      const normalWalk = ({ peep, props }) => {
+        const { startX, startY, endX } = props;
+        const xDuration = 10;
+        const yDuration = 0.25;
+        const tl = gsap.timeline();
+
+        tl.timeScale(randomRange(0.5, 1.5));
+        tl.to(peep, { duration: xDuration, x: endX, ease: "none" }, 0);
+        tl.to(peep, { duration: yDuration, repeat: xDuration / yDuration, yoyo: true, y: startY - 10 }, 0);
+
+        return tl;
+      };
+
+      const walks = [normalWalk];
+      const img = document.createElement("img");
+      const stage = { width: 0, height: 0 };
+      const allPeeps = [];
+      const availablePeeps = [];
+      const crowd = [];
+
+      const createPeep = ({ image, rect }) => {
+        const peep = {
+          image,
+          rect: rect,
+          width: rect[2],
+          height: rect[3],
+          x: 0,
+          y: 0,
+          anchorY: 0,
+          scaleX: 1,
+          walk: null,
+          render: (ctx) => {
+            ctx.save();
+            ctx.translate(peep.x, peep.y);
+            ctx.scale(peep.scaleX, 1);
+            ctx.drawImage(peep.image, peep.rect[0], peep.rect[1], peep.rect[2], peep.rect[3], 0, 0, peep.width, peep.height);
+            ctx.restore();
+          }
+        };
+        return peep;
+      };
+
+      const createPeeps = () => {
+        const { naturalWidth: width, naturalHeight: height } = img;
+        const total = rows * cols;
+        const rectWidth = width / rows;
+        const rectHeight = height / cols;
+
+        for (let i = 0; i < total; i++) {
+          allPeeps.push(createPeep({
+            image: img,
+            rect: [
+              (i % rows) * rectWidth,
+              ((i / rows) | 0) * rectHeight,
+              rectWidth,
+              rectHeight
+            ]
+          }));
+        }
+      };
+
+      const initCrowd = () => {
+        while (availablePeeps.length) {
+          addPeepToCrowd().walk.progress(Math.random());
+        }
+      };
+
+      const addPeepToCrowd = () => {
+        const peep = removeRandomFromArray(availablePeeps);
+        const walk = getRandomFromArray(walks)({
+          peep,
+          props: resetPeep({ peep, stage })
+        }).eventCallback("onComplete", () => {
+          removePeepFromCrowd(peep);
+          addPeepToCrowd();
+        });
+
+        peep.walk = walk;
+        crowd.push(peep);
+        crowd.sort((a, b) => a.anchorY - b.anchorY);
+
+        return peep;
+      };
+
+      const removePeepFromCrowd = (peep) => {
+        removeItemFromArray(crowd, peep);
+        availablePeeps.push(peep);
+      };
+
+      const render = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.scale(window.devicePixelRatio || 1, window.devicePixelRatio || 1);
+        crowd.forEach(peep => peep.render(ctx));
+        ctx.restore();
+      };
+
+      const resize = () => {
+        stage.width = canvas.clientWidth;
+        stage.height = canvas.clientHeight;
+        canvas.width = stage.width * (window.devicePixelRatio || 1);
+        canvas.height = stage.height * (window.devicePixelRatio || 1);
+
+        crowd.forEach(peep => peep.walk.kill());
+        crowd.length = 0;
+        availablePeeps.length = 0;
+        availablePeeps.push(...allPeeps);
+
+        initCrowd();
+      };
+
+      img.onload = () => {
+        createPeeps();
+        resize();
+        gsap.ticker.add(render);
+      };
+      
+      img.src = src;
+      window.addEventListener("resize", resize);
+    }
+  </script>
+</body>
+</html>
